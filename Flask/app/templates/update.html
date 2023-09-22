@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Обновить {% endblock %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% if username %}
+<h1> Update user!</h1><br><br>
+<table class="table table-hover table-bordered table-striped">
+    {% for our_user in our_users %}
+    <tr>
+        <td>
+            {{ our_user.id }}. {{ our_user.username }} - {{ our_user.email }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+{% else %}
+<div class="shadow p-3 mb-5 bg-body rounded">
+<form action="/update/{{ name_to_update.id }}" method="post" novalidate class="mt-5">
+        <h1> Update user... </h1>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label(class="form-label") }}<br>
+            {{ form.username(class="form-control", value=name_to_update.username) }}<br>
+            {{ form.email.label(class="form-label") }}<br>
+            {{ form.email(class="form-control", value=name_to_update.email) }}<br>
+            {{ form.submit(class="btn btn-secondary") }}
+        </p>
+</form>
+</div>
+{% endif %}
+{% endblock %}

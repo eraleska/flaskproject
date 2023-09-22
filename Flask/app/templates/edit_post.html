@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Редактировать пост {% endblock %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+<div class="shadow p-3 mb-5 bg-body rounded">
+<form action="" method="post" novalidate class="mt-5">
+    <a href="{{ url_for('post', id=post.id) }}" class="btn btn-outline-secondary" type="button">Назад</a>
+        <h1> Редактировать </h1>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label(class="form-label") }}<br>
+            {{ form.title(class="form-control") }}<br>
+            {{ form.slug.label(class="form-label") }}<br>
+            {{ form.slug(class="form-control") }}<br>
+            {{ form.content.label(class="form-label") }}<br>
+            {{ form.content(class="form-control", rows="5") }}<br>
+            {{ form.submit(class="btn btn-secondary") }}
+        </p>
+</form>
+</div>
+{% endblock %}
